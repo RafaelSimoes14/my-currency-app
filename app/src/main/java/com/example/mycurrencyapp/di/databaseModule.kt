@@ -1,14 +1,20 @@
 package com.example.mycurrencyapp.di
 
-import android.app.Application
 import androidx.room.Room
 import com.example.mycurrencyapp.data.local.database.AppDatabase
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val databaseModule = module {
     single {
-        Room.databaseBuilder(get<Application>(), AppDatabase::class.java, "currency_database")
-            .build()
+        Room.databaseBuilder(
+            androidContext(),
+            AppDatabase::class.java,
+            "currency_database"
+        ).build()
     }
-    single { get<AppDatabase>().currencyDao() }
+
+    single {
+        get<AppDatabase>().currencyDao()
+    }
 }

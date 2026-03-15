@@ -11,33 +11,23 @@ class MyCurrencyRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : MyCurrencyRepository {
+
+    override suspend fun getCurrencies(): List<String> {
+
+        val local = localDataSource.getCurrencies()
+        if (local.isNotEmpty()) {
+            return local.map { it.code }
+        }
+        val response = remoteDataSource.getRates("USD")
+        val currencies = response.rates.keys
+        localDataSource.saveCurrencies(
+            currencies.map { CurrencyEntity(it) }
+        )
+        return currencies.toList()
+    }
+
     override suspend fun getRates(base: String): CurrencyRates {
-//        val response = remoteDataSource.getRates(base)
-//        return CurrencyMapper.mapToDomain(response)
-        val localCurrencies = localDataSource.getCurrencies()
-
-        if (localCurrencies.isNotEmpty()) {
-
-            val currencies = localCurrencies.associate {
-                it.code to 1.0
-            }
-
-            return CurrencyRates(
-                base = base,
-                rates = currencies
-            )
-        }
-
         val response = remoteDataSource.getRates(base)
-
-        val domain = CurrencyMapper.mapToDomain(response)
-
-        val entities = domain.rates.keys.map {
-            CurrencyEntity(code = it)
-        }
-
-        localDataSource.saveCurrencies(entities)
-
-        return domain
+        return CurrencyMapper.mapToDomain(response)
     }
 }

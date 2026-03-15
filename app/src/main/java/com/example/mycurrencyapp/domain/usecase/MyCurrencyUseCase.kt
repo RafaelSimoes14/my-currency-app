@@ -6,8 +6,7 @@ class MyCurrencyUseCase(
     private val repository: MyCurrencyRepository
 ) {
     suspend fun getCurrencies(): List<String> {
-        val currencyRates = repository.getRates("USD")
-        return currencyRates.rates.keys.toList().sorted()
+        return repository.getCurrencies()
     }
 
     suspend fun convert(
@@ -16,7 +15,9 @@ class MyCurrencyUseCase(
         amount: Double
     ): Double {
         val currencyRates = repository.getRates(from)
-        val rate = currencyRates.rates[to] ?: 0.0
+
+        val rate = currencyRates.rates[to]
+            ?: throw Exception("Currency not found")
         return amount * rate
     }
 }
