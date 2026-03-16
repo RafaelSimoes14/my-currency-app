@@ -5,6 +5,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 
+private const val ZERO = 0
 fun Spinner.setupCurrencies(currencies: List<String>) {
     val adapter = ArrayAdapter(
         context,
@@ -24,7 +25,7 @@ fun Spinner.restoreSelection(
 
         val index = currencies.indexOf(it)
 
-        if (index >= 0) {
+        if (index >= ZERO) {
             setSelection(index)
         }
     }

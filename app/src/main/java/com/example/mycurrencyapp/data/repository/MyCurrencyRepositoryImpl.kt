@@ -18,7 +18,7 @@ class MyCurrencyRepositoryImpl(
         if (local.isNotEmpty()) {
             return local.map { it.code }
         }
-        val response = remoteDataSource.getRates("USD")
+        val response = remoteDataSource.getRates(BASE)
         val currencies = response.rates.keys
         localDataSource.saveCurrencies(
             currencies.map { CurrencyEntity(it) }
@@ -29,5 +29,9 @@ class MyCurrencyRepositoryImpl(
     override suspend fun getRates(base: String): CurrencyRates {
         val response = remoteDataSource.getRates(base)
         return CurrencyMapper.mapToDomain(response)
+    }
+
+    private companion object {
+        const val BASE = "USD"
     }
 }

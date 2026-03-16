@@ -90,14 +90,14 @@ class MyCurrencyActivity : AppCompatActivity() {
         val amount = amountText.toValidAmount()
 
         if (amount == null) {
-            etAmount.error = "Invalid amount"
+            etAmount.error = INVALID_AMOUNT
             return null
         }
         return amount
     }
 
     private fun setupListeners() = with(binding) {
-        etAmount.keyListener = DigitsKeyListener.getInstance("0123456789,.")
+        etAmount.keyListener = DigitsKeyListener.getInstance(ACCEPTED)
         etAmount.doAfterTextChanged {
             val amount = it.toString().toValidAmount()
             btnConvert.isEnabled = amount != null
@@ -117,5 +117,10 @@ class MyCurrencyActivity : AppCompatActivity() {
                 amount = amount
             )
         }
+    }
+
+    private companion object {
+        const val INVALID_AMOUNT = "Invalid amount"
+        const val ACCEPTED = "0123456789,."
     }
 }

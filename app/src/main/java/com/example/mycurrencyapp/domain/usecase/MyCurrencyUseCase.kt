@@ -17,7 +17,11 @@ class MyCurrencyUseCase(
         val currencyRates = repository.getRates(from)
 
         val rate = currencyRates.rates[to]
-            ?: throw Exception("Currency not found")
+            ?: throw Exception(EXCEPTION_MESSAGE)
         return amount * rate
+    }
+
+    private companion object {
+        const val EXCEPTION_MESSAGE = "Currency not found"
     }
 }

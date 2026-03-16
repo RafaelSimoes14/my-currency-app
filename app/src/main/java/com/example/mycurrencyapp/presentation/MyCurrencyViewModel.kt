@@ -27,10 +27,10 @@ class MyCurrencyViewModel(
                 _uiState.value =
                     MyCurrencyUiState.CurrenciesLoaded(currencies)
 
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 _uiState.value =
                     MyCurrencyUiState.Error(
-                        "Erro ao carregar moedas"
+                        CURRENCIES_ERROR
                     )
             }
         }
@@ -53,12 +53,17 @@ class MyCurrencyViewModel(
                     to = to,
                     result = result
                 )
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 _uiState.value =
                     MyCurrencyUiState.Error(
-                        "Erro na conversão"
+                        CONVERT_ERROR
                     )
             }
         }
+    }
+
+    private companion object {
+        const val CURRENCIES_ERROR = "Erro ao carregar moedas"
+        const val CONVERT_ERROR = "Erro na conversão"
     }
 }

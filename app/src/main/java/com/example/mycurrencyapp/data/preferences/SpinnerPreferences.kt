@@ -4,22 +4,27 @@ import android.content.Context
 import androidx.core.content.edit
 
 class SpinnerPreferences(context: Context) {
-    private val prefs =
-        context.getSharedPreferences("currency_prefs", Context.MODE_PRIVATE)
+    private val prefs = context.getSharedPreferences(CURRENCY_PREFS, Context.MODE_PRIVATE)
 
     fun saveFrom(currency: String) {
-        prefs.edit { putString("from", currency) }
+        prefs.edit { putString(FROM, currency) }
     }
 
     fun saveTo(currency: String) {
-        prefs.edit { putString("to", currency) }
+        prefs.edit { putString(TO, currency) }
     }
 
     fun getFrom(): String? {
-        return prefs.getString("from", null)
+        return prefs.getString(FROM, null)
     }
 
     fun getTo(): String? {
-        return prefs.getString("to", null)
+        return prefs.getString(TO, null)
+    }
+
+    private companion object {
+        const val CURRENCY_PREFS = "currency_prefs"
+        const val FROM = "from"
+        const val TO = "to"
     }
 }
