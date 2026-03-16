@@ -36,15 +36,12 @@ class MyCurrencyActivity : AppCompatActivity() {
                 is MyCurrencyUiState.Loading -> {
                     renderLoading()
                 }
-
                 is MyCurrencyUiState.CurrenciesLoaded -> {
                     setupDropdown(state.currencies)
                 }
-
                 is MyCurrencyUiState.ConversionSuccess -> {
                     setupConversionSuccess(state)
                 }
-
                 is MyCurrencyUiState.Error -> {
                     renderError(state)
                 }

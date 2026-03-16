@@ -22,5 +22,4 @@ class SpinnerPreferences(context: Context) {
     fun getTo(): String? {
         return prefs.getString("to", null)
     }
-
 }
