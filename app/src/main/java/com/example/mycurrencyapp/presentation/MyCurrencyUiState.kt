@@ -1,7 +1,5 @@
 package com.example.mycurrencyapp.presentation
 
-import android.icu.util.CurrencyAmount
-
 interface MyCurrencyUiState {
     object Loading : MyCurrencyUiState
 

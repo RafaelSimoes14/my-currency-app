@@ -5,19 +5,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 
-fun Spinner.setupCurrencies(
-    currencies: List<String>
-) {
+fun Spinner.setupCurrencies(currencies: List<String>) {
     val adapter = ArrayAdapter(
         context,
         android.R.layout.simple_spinner_item,
         currencies
     )
 
-    adapter.setDropDownViewResource(
-        android.R.layout.simple_spinner_dropdown_item
-    )
-
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
     this.adapter = adapter
 }
 
@@ -35,23 +30,19 @@ fun Spinner.restoreSelection(
     }
 }
 
-fun Spinner.onItemSelected(
-    onSelected: (String) -> Unit
-) {
-    onItemSelectedListener =
-        object : AdapterView.OnItemSelectedListener {
+fun Spinner.onItemSelected(onSelected: (String) -> Unit) {
 
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-
-                val value = parent.getItemAtPosition(position) as String
-                onSelected(value)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {}
+    onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            val value = parent.getItemAtPosition(position) as String
+            onSelected(value)
         }
+
+        override fun onNothingSelected(parent: AdapterView<*>) {}
+    }
 }

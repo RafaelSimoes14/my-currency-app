@@ -1,5 +1,8 @@
 package com.example.mycurrencyapp.util
 
+import android.icu.text.NumberFormat
+import java.util.Locale
+
 fun Double.toConversionString(
     amount: Double,
     from: String,
@@ -9,7 +12,10 @@ fun Double.toConversionString(
 }
 
 fun Double.formatCurrency(): String {
-    return String.format("%.2f", this)
+    val formatter = NumberFormat.getNumberInstance(Locale("pt", "BR"))
+    formatter.minimumFractionDigits = 2
+    formatter.maximumFractionDigits = 2
+    return formatter.format(this)
 }
 
 fun String.toValidAmount(): Double? {
