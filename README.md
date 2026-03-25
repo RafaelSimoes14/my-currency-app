@@ -10,6 +10,20 @@ O projeto foi desenvolvido com o objetivo de demonstrar a implementação de um 
 
 ---
 
+## Screenshots
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b17c5a59-eb6c-443b-a3d8-82b37ca0bd31" width="220"/>
+  <img src="https://github.com/user-attachments/assets/e913a591-89da-48b6-849c-cd9dfae59b63" width="220"/>
+  <img src="https://github.com/user-attachments/assets/66363608-82c9-472e-b1fb-70efef8d49a2" width="220"/>
+</p>
+
+<p align="center">
+  Inicialização • Tela inicial • Resultado
+</p>
+
+---
+
 ## Passos para rodar o app
 
 1. Clone o repositório
